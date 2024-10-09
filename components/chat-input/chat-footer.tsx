@@ -9,9 +9,9 @@ export const ChatFooter = () => {
         textColor="tertiary"
         className="inline-block text-center"
       >
-        LLMChat is open source and your data is stored locally. project by{" "}
+        aiConnect is created by{" "}
         <Link
-          href="https://trendy.design"
+          href="https://aitekph.com/"
           target="_blank"
           className="inline-block text-violet-500 underline decoration-zinc-500/20 underline-offset-2"
         >
