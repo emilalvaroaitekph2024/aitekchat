@@ -15,7 +15,7 @@ export const ChatFooter = () => {
           target="_blank"
           className="inline-block text-violet-500 underline decoration-zinc-500/20 underline-offset-2"
         >
-          trendy.design
+          Aitek Software
         </Link>
       </Type>
     </Flex>
