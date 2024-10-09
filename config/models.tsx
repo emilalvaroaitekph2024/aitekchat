@@ -4,7 +4,7 @@ export const providers = [
   "llmchat",
   "openai",
   "anthropic",
-  "gemini",
+  "emilio", // Changed label to emilio but internally mapped to gemini
   "ollama",
   "groq",
 ] as const;
@@ -24,6 +24,14 @@ export const allPlugins = [
   "pie_chart",
   "line_chart",
 ];
+
+// Function to alias gemini with emilio
+const aliasGeminiAsEmilio = (model: TModelItem): TModelItem => ({
+  ...model,
+  name: model.name.replace("Gemini", "EmilioLLM"),
+  icon: "emilio", // Changing icon to emilio
+  provider: "emilio", // Changing provider to emilio
+});
 
 export const models: TModelItem[] = [
   ...(process.env.NEXT_PUBLIC_ENABLE_AUTH === "true"
@@ -55,6 +63,18 @@ export const models: TModelItem[] = [
     icon: "gpt4",
     provider: "openai",
   },
+  aliasGeminiAsEmilio({
+    name: "Gemini Flash 1.5",
+    key: "gemini-1.5-flash-8b",
+    isNew: true,
+    tokens: 200000,
+    description: "Best for fast responses and complex tasks",
+    maxOutputTokens: 20000, // Updated from 8192 to 20000
+    vision: true,
+    plugins: [],
+    icon: "gemini", // Kept original icon but aliased as emilio
+    provider: "gemini", // Kept original provider but aliased as emilio
+  }),
   {
     name: "GPT 4o",
     key: "gpt-4o",
@@ -79,140 +99,35 @@ export const models: TModelItem[] = [
     icon: "gpt4",
     provider: "openai",
   },
-  {
-    name: "GPT4",
-    key: "gpt-4",
-    isNew: false,
-    description: "Best for complex tasks",
-
-    tokens: 128000,
-    maxOutputTokens: 4096,
-    plugins: allPlugins,
-    icon: "gpt4",
-    provider: "openai",
-  },
-  {
-    name: "GPT3.5 Turbo",
-    key: "gpt-3.5-turbo",
-    isNew: false,
-    tokens: 16384,
-    description: "Best for complex tasks",
-
-    maxOutputTokens: 4096,
-    plugins: allPlugins,
-    icon: "gpt3",
-    provider: "openai",
-  },
-  {
-    name: "GPT3.5 Turbo 0125",
-    key: "gpt-3.5-turbo-0125",
-    isNew: false,
-    tokens: 16384,
-    description: "Best for complex tasks",
-
-    maxOutputTokens: 4096,
-    plugins: allPlugins,
-    icon: "gpt3",
-    provider: "openai",
-  },
-  {
-    name: "Claude 3 Opus",
-    key: "claude-3-opus-20240229",
-    isNew: false,
-    tokens: 200000,
-    vision: true,
-    description: "Best for complex tasks",
-
-    maxOutputTokens: 4096,
-    plugins: allPlugins,
-    icon: "anthropic",
-    provider: "anthropic",
-  },
-  {
-    name: "Claude 3.5 Sonnet",
-    key: "claude-3-5-sonnet-20240620",
-    isNew: false,
-    tokens: 200000,
-    description: "Best for complex tasks",
-
-    vision: true,
-    maxOutputTokens: 4096,
-    plugins: allPlugins,
-    icon: "anthropic",
-    provider: "anthropic",
-  },
-  {
-    name: "Claude 3 Sonnet",
-    key: "claude-3-sonnet-20240229",
-    isNew: false,
-    tokens: 200000,
-    description: "Best for complex tasks",
-
-    vision: true,
-    maxOutputTokens: 4096,
-    plugins: allPlugins,
-    icon: "anthropic",
-    provider: "anthropic",
-  },
-  {
-    name: "Claude 3 Haiku",
-    key: "claude-3-haiku-20240307",
-    isNew: false,
-    tokens: 200000,
-    description: "Best for complex tasks",
-
-    vision: true,
-    maxOutputTokens: 4096,
-    plugins: allPlugins,
-    icon: "anthropic",
-    provider: "anthropic",
-  },
-  {
+  aliasGeminiAsEmilio({
     name: "Gemini Pro 1.5",
     key: "gemini-1.5-pro-latest",
     isNew: false,
     tokens: 200000,
-    vision: true,
     description: "Best for complex tasks",
-
     maxOutputTokens: 8192,
-    plugins: [],
-    icon: "gemini",
-    provider: "gemini",
-  },
-  {
-    name: "Gemini Flash 1.5",
-    key: "gemini-1.5-flash-latest",
-    isNew: false,
-    tokens: 200000,
-    description: "Best for complex tasks",
-
     vision: true,
-    maxOutputTokens: 8192,
     plugins: [],
-    icon: "gemini",
-    provider: "gemini",
-  },
-  {
+    icon: "gemini", // Kept original icon but aliased as emilio
+    provider: "gemini", // Kept original provider but aliased as emilio
+  }),
+  aliasGeminiAsEmilio({
     name: "Gemini Pro",
     key: "gemini-pro",
     isNew: false,
     tokens: 200000,
     description: "Best for complex tasks",
-
     maxOutputTokens: 4096,
     plugins: [],
-    icon: "gemini",
-    provider: "gemini",
-  },
-
+    icon: "gemini", // Kept original icon but aliased as emilio
+    provider: "gemini", // Kept original provider but aliased as emilio
+  }),
   {
     name: "LLama3 70b Groq",
     key: "llama3-groq-70b-8192-tool-use-preview",
     isNew: false,
     tokens: 200000,
     description: "Best for complex tasks",
-
     plugins: ["web_search", "image_generation", "memory", "webpage_reader"],
     maxOutputTokens: 4096,
     icon: "groq",
@@ -224,7 +139,6 @@ export const models: TModelItem[] = [
     isNew: false,
     tokens: 200000,
     description: "Best for complex tasks",
-
     plugins: [],
     maxOutputTokens: 4096,
     icon: "groq",
