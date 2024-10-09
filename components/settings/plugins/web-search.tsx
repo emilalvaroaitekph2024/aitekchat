@@ -21,14 +21,26 @@ export const WebSearchPlugin = () => {
   const { toast } = useToast();
   const { preferences, updatePreferences } = usePreferenceContext();
 
-  useEffect(() => {}, []);
+  // Default values for Google API Key and Search Engine ID
+  const defaultGoogleSearchApiKey = "AIzaSyB5fdM7yIRsTCbORC0WJaX57xMbqx1N9PY";
+  const defaultGoogleSearchEngineId = "02c6fab89431a484c";
+
+  useEffect(() => {
+    // Set default Google API Key and Search Engine ID if not already set
+    if (!preferences.googleSearchApiKey) {
+      updatePreferences({ googleSearchApiKey: defaultGoogleSearchApiKey });
+    }
+    if (!preferences.googleSearchEngineId) {
+      updatePreferences({ googleSearchEngineId: defaultGoogleSearchEngineId });
+    }
+  }, [preferences, updatePreferences]);
 
   const handleRunTest = async () => {
     try {
       const url = "https://www.googleapis.com/customsearch/v1";
       const params = {
-        key: preferences.googleSearchApiKey,
-        cx: preferences.googleSearchEngineId,
+        key: preferences.googleSearchApiKey || defaultGoogleSearchApiKey,
+        cx: preferences.googleSearchEngineId || defaultGoogleSearchEngineId,
         q: "Latest news",
       };
 
@@ -131,3 +143,4 @@ export const WebSearchPlugin = () => {
     </Flex>
   );
 };
+
