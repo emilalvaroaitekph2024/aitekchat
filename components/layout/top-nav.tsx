@@ -4,7 +4,6 @@ import { Button, Flex, Type } from "@/ui";
 import { ChevronLeft, FlagIcon, PanelLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
-import { FaGithub } from "react-icons/fa";
 import { useFeedback } from "../feedback/use-feedback";
 
 interface TopNavProps {
@@ -75,16 +74,17 @@ export const TopNav = ({
           {children}
         </Flex>
         <Flex gap="xs" items="center">
-          <Button
+          {/* The GitHub icon button has been commented out or removed */}
+          {/* <Button
             variant="bordered"
             size="sm"
             onClick={() => {
-              window.open("https://git.new/llmchat", "_blank");
+              window.open("https://aitekph.com/", "_blank");
             }}
           >
             <FaGithub size={16} />
-            <span className="hidden md:block">Star on Github</span>
-          </Button>
+            <span className="hidden md:block"></span>
+          </Button> */}
           <Button
             variant="bordered"
             size="sm"
@@ -101,3 +101,4 @@ export const TopNav = ({
     </Flex>
   );
 };
+
