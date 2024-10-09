@@ -3,9 +3,9 @@ import { TPreferences } from "@/lib/types";
 export const defaultPreferences: TPreferences = {
   id: 1,
   defaultAssistant:
-    process.env.NEXT_PUBLIC_ENABLE_AUTH === "true" ? "llmchat" : "gpt-4o-mini",
+    process.env.NEXT_PUBLIC_ENABLE_AUTH === "true" ? "aiConnect" : "gpt-4o-mini", // Changed from llmchat to aiConnect
   systemPrompt:
-    "You're helpful assistant that can help me with my questions. Today is {{local_date}}.",
+    "You're a helpful assistant that can help me with my questions. Today is {{local_date}}.",
   messageLimit: 5,
   temperature: "0.5",
   suggestRelatedQuestions: true,
@@ -26,5 +26,5 @@ export const defaultPreferences: TPreferences = {
 
 export const defaultKeys = {
   ollama: "ollama",
-  llmchat: "llmchat",
+  aiConnect: "aiConnect", // Changed from llmchat to aiConnect
 };
